@@ -1,4 +1,4 @@
-import client from "@/app/mongodb.tsx";
+import client from "@/app/mongodb";
 import { cacheLife } from "next/cache";
 import { Suspense } from "react";
 
