@@ -9,7 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@vercel/functions": "^3.3.5",
     "geist": "^1.5.1",
+    "mongodb": "^7.0.0",
     "next": "16.1.1",
     "react": "19.2.3",
     "react-dom": "19.2.3"

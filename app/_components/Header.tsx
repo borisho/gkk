@@ -16,11 +16,14 @@ export default function Header() {
           />
           <span className="m-1 text-xl">GKK</span>
         </Link>
+        <Link href="/posts" className="inline-flex items-center px-2">
+          <span className="m-1 text-l">Posts</span>
+        </Link>
         <Link
           href="https://gkk.sago.sk/"
           className="inline-flex items-center px-2"
         >
-          <span className="m-1 text-l">Test</span>
+          <span className="m-1 text-l">gkk.sago.sk</span>
         </Link>
       </nav>
     </header>
