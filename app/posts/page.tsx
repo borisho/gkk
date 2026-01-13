@@ -1,6 +1,6 @@
 import client from "@/app/mongodb";
-import { cacheLife } from "next/cache";
 import { Suspense } from "react";
+import { cacheLife } from "next/cache";
 
 export default async function Posts() {
   "use cache";
@@ -14,7 +14,7 @@ export default async function Posts() {
       <h1>Posts Page</h1>
       <Suspense fallback={<div>Loading posts...</div>}>
         {allPosts.map((post) => (
-          <div key={post._id} className="flex flex-col items-center">
+          <div key={post._id.toString()} className="flex flex-col items-center">
             <h2>{post.title}</h2>
             <p>{post.excerpt}</p>
             <h3>By: {post.slug}</h3>

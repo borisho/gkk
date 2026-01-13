@@ -1,4 +1,4 @@
-export default async function PostLayout({
+export default function PostLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
