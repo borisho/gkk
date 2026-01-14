@@ -13,17 +13,19 @@ export default async function Posts({
   params: Promise<{ slug: string }>;
 }) {
   return (
-    <Suspense fallback={<div>Loading post...</div>}>
-      <SearchContent params={params} />
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center">
+          Loading post metadata...
+        </div>
+      }
+    >
+      <PostContent params={params} />
     </Suspense>
   );
 }
 
-async function SearchContent({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+async function PostContent({ params }: { params: Promise<{ slug: string }> }) {
   "use cache";
   cacheLife("max");
 
@@ -31,21 +33,19 @@ async function SearchContent({
   const posts = client
     .db(process.env.DB_NAME!)
     .collection<Post>(process.env.DB_COLLECTION!);
+
   const post = await posts.findOne(
     { slug: slug },
     { projection: { excerpt: 0 } }
   );
 
   if (!post) {
-    return <div>Post not found.</div>;
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        Post not found.
+      </div>
+    );
   }
-
-  const content = await fetch(process.env.POSTS_URI! + slug + ".md")
-    .then((res) => res.text())
-    .catch((err) => {
-      console.error("Error fetching post content:", err);
-      return "Error loading content.";
-    });
 
   return (
     <article className="flex flex-col min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
@@ -54,7 +54,15 @@ async function SearchContent({
         <p>{post.category}</p>
       </header>
       <section className="flex flex-col gap-2 items-center justify-center">
-        <Markdown remarkPlugins={[remarkGfm]}>{content}</Markdown>
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center">
+              Loading post...
+            </div>
+          }
+        >
+          <BodyContent slug={slug} />
+        </Suspense>
       </section>
       <footer className="flex gap-10 items-center m-5">
         <div className="flex gap-2 items-center">
@@ -70,4 +78,22 @@ async function SearchContent({
       </footer>
     </article>
   );
+}
+
+async function BodyContent({ slug }: { slug: string }) {
+  "use cache";
+  cacheLife("max");
+
+  const resp = await fetch(process.env.POSTS_URI! + slug + ".md");
+  const content = await resp.text();
+
+  if (!content) {
+    return (
+      <div className="flex items-center justify-center">
+        Failed to load post content.
+      </div>
+    );
+  }
+
+  return <Markdown remarkPlugins={[remarkGfm]}>{content}</Markdown>;
 }
