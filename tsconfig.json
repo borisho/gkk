@@ -21,6 +21,8 @@
     "paths": {
       "@/*": ["./*"],
       "@appComponents/*": ["./app/_components/*"],
+      "@postsComponents/*": ["./app/posts/_components/*"],
+      "@postComponents/*": ["./app/posts/[slug]/_components/*"],
       "@appTypes/*": ["./app/_types/*"]
     }
   },
