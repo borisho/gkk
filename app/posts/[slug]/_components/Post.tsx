@@ -27,22 +27,20 @@ export default async function Post({
   if (!post) notFound();
 
   return (
-    <article className="flex flex-col min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+    <article className="flex flex-col items-center justify-center bg-zinc-50 dark:bg-black">
       <header className="flex gap-10 m-5">
         <h1>{post.title}</h1>
         <p>{post.category}</p>
       </header>
-      <section className="flex flex-col gap-2 items-center justify-center">
-        <Suspense
-          fallback={
-            <div className="flex items-center justify-center">
-              Loading post...
-            </div>
-          }
-        >
-          <MarkdownProcessor slug={slug} />
-        </Suspense>
-      </section>
+      <Suspense
+        fallback={
+          <div className="flex items-center justify-center">
+            Loading post...
+          </div>
+        }
+      >
+        <MarkdownProcessor slug={slug} />
+      </Suspense>
       <footer className="flex gap-10 items-center m-5">
         <div className="flex gap-2 items-center">
           <span>By: {post.author}</span>
