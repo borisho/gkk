@@ -25,7 +25,9 @@ export default function RootLayout({
       </head>
       <body>
         <Header />
-        {children}
+        <main className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-black">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

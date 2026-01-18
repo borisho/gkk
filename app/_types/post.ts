@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 
-export type Post = {
+export type PostType = {
   _id: ObjectId;
   author: string;
   authorImage: string;
