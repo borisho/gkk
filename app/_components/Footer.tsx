@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="flex flex-col items-center justify-center gap-2 my-10">
-      <h1 className="text-gray-100 text-2xl">KONTAKT</h1>
+      <h1 className="text-2xl dark:text-gray-100">KONTAKT</h1>
       <div className="flex flex-col items-center justify-center">
         <span>Slavomír Králik</span>
         <span>Bruselská 13, 040 13, Košice</span>
@@ -31,7 +31,7 @@ export default function Footer() {
         </span>
       </div>
       <div className="flex flex-col items-center justify-center">
-        <h2 className="text-gray-100 text-xl">Email:</h2>
+        <h2 className="text-xl dark:text-gray-100">Email:</h2>
         <Link
           className="text-red-200 transition ease duration-500 hover:text-red-600"
           href="mailto:kralikslavomir@gmail.com"

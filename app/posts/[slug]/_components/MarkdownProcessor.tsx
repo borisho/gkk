@@ -1,6 +1,7 @@
 import { cacheLife } from "next/cache";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import MarkdownFetchError from "@postComponents/MarkdownFetchError";
 
 export default async function MarkdownProcessor({ slug }: { slug: string }) {
   "use cache";
@@ -8,14 +9,7 @@ export default async function MarkdownProcessor({ slug }: { slug: string }) {
 
   const resp = await fetch(process.env.POSTS_URI! + slug + ".md");
   const content = await resp.text();
-
-  if (!content) {
-    return (
-      <div className="flex items-center justify-center">
-        Failed to load post content.
-      </div>
-    );
-  }
+  if (!resp.ok || !content) return <MarkdownFetchError />;
 
   return <Markdown remarkPlugins={[remarkGfm]}>{content}</Markdown>;
 }
