@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import Post from "@postComponents/Post";
 
 // TODO refactor class
-export default async function Posts({
+export default async function PostPage({
   params,
 }: {
   params: Promise<{ slug: string }>;

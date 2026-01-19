@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { cacheLife } from "next/cache";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { PostType } from "@appTypes/post";
+import { PostType } from "@appTypes/posts";
 import MarkdownProcessor from "@postComponents/MarkdownProcessor";
 
 export default async function Post({

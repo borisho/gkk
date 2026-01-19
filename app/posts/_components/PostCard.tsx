@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { PostType } from "@appTypes/post";
+import { PostType } from "@appTypes/posts";
 
 export default function PostCard({ post }: { post: PostType }) {
   return (

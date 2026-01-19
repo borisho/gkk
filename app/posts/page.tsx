@@ -2,10 +2,10 @@ import client from "@/app/mongodb";
 import { Suspense } from "react";
 import { cacheLife } from "next/cache";
 import { notFound } from "next/navigation";
-import { PostType } from "@appTypes/post";
+import { PostType } from "@appTypes/posts";
 import PostCard from "@postsComponents/PostCard";
 
-export default async function Posts() {
+export default async function PostsPage() {
   "use cache";
   cacheLife("days");
 
