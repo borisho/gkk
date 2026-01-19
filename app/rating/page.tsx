@@ -11,8 +11,10 @@ export default async function RatingPage() {
     process.env.NEXT_PUBLIC_EGD_DB +
       "GetPlayerDataByData.php?lastname=*&country=sk",
   );
+  if (!resp.ok) notFound();
+
   const result: RatingResponseType = await resp.json();
-  if (!resp.ok || !result) notFound();
+  if (!result) notFound();
 
   return <RatingTable players={result.players} />;
 }
