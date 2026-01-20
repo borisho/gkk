@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
-import Header from "./_components/Header";
-import Footer from "./_components/Footer";
+import Header from "@appComponents/Header";
+import Footer from "@appComponents/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {

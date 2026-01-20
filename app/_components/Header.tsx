@@ -19,6 +19,9 @@ export default function Header() {
         <Link href="/posts" className="inline-flex items-center px-2">
           <span className="m-1 text-l">Posts</span>
         </Link>
+        <Link href="/rating" className="inline-flex items-center px-2">
+          <span className="m-1 text-l">Rating</span>
+        </Link>
         <Link
           href="https://gkk.sago.sk/"
           className="inline-flex items-center px-2"
