@@ -1,12 +1,37 @@
 "use client";
 
-import React, { useState } from "react";
-import { PlayerType } from "@appTypes/rating";
+import React, { useEffect, useState } from "react";
+import { notFound } from "next/navigation";
+import { RatingResponseType, PlayerType } from "@appTypes/rating";
 import TableHead from "@ratingComponents/TableHead";
 import TableRow from "@ratingComponents/TableRow";
 
-export default function RatingTable({ players }: { players: PlayerType[] }) {
+export default function RatingTable() {
   const [active, setActive] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+  const [players, setPlayers] = useState<PlayerType[] | null | undefined>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          process.env.NEXT_PUBLIC_EGD_DB +
+            "GetPlayerDataByData.php?lastname=*&country=sk",
+        );
+
+        if (!response.ok) {
+          throw new Error(`Request failed: ${response.status}`);
+        }
+
+        const json: RatingResponseType = await response.json();
+        setPlayers(json.players);
+      } catch (err) {
+        setError(err as Error);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   function generateRow(players: PlayerType[], active: boolean) {
     return players
@@ -21,6 +46,10 @@ export default function RatingTable({ players }: { players: PlayerType[] }) {
         <TableRow key={player.Pin_Player} player={player} i={i} />
       ));
   }
+
+  if (error) throw new Error("Chyba pri načítavaní dát: " + error.message);
+
+  if (!players) notFound();
 
   return (
     <table>
