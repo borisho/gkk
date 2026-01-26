@@ -5,7 +5,10 @@ import { PostType } from "@appTypes/posts";
 export default function PostCard({ post }: { post: PostType }) {
   return (
     <article className="flex flex-col items-center gap-2">
-      <h2>{post.title}</h2>
+      <header className="flex items-center gap-1">
+        <h2>{post.title}</h2>
+        <p>{post.category}</p>
+      </header>
       <p>{post.excerpt}</p>
       <footer className="flex items-center gap-1">
         <div className="flex flex-col items-center gap-1">
