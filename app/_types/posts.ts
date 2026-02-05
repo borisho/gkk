@@ -10,4 +10,5 @@ export type PostType = {
   imageFolder: boolean;
   slug: string;
   title: string;
+  tournament: Date | null;
 };
